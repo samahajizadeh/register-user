@@ -1,9 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Button = (props)=>{
-    const UIbtn = `${"btn"} ${props.className}`
-    return <button type={props.type} className={UIbtn} onClick={props.onClick}>{props.children}</button>
-
+class Button extends Component{
+    render(){
+        const UIbtn = `${"btn"} ${this.props.className}`
+        return(
+            <button type={this.props.type} className={UIbtn} onClick={this.props.onClick}>{this.props.children}</button>
+        )
+    }
 }
+// const Button = (props)=>{
+//     const UIbtn = `${"btn"} ${props.className}`
+//     return <button type={props.type} className={UIbtn} onClick={props.onClick}>{props.children}</button>
+
+// }
 
 export default Button;

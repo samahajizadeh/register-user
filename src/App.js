@@ -1,13 +1,10 @@
 import React from "react";
-import UserFinder from "./components/Users/UserFinder";
-import { UserProvider } from "./store/user-context";
+import Movie from "./components/Movies/Movie";
 
 const App = () => {
   return (
     <div className="container-fluid bg-dark">
-      <UserProvider>
-        <UserFinder />
-      </UserProvider>
+      <Movie />
     </div>
   );
 };

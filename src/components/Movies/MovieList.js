@@ -11,7 +11,7 @@ const MovieList = (props) => {
   //     releaseDate={item.releaseDate}
   //   />
   // ));
-  let content = <h3> faoun no Movie</h3>;
+  let content = <h3> found not movie</h3>;
   if (props.movie.length > 0) {
     content = props.movie.map((item) => (
       <MovieItem

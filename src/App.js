@@ -1,10 +1,15 @@
 import React from "react";
-import Movie from "./components/Movies/Movie";
+import BackwardCounter from "./components/BackwardCounter";
+import ForwardCounter from "./components/ForwardCounter";
 
 const App = () => {
   return (
     <div className="container-fluid bg-dark">
-      <Movie />
+      <div className="row justify-content-center">
+        <BackwardCounter />
+        <div className="w-100" ></div>
+        <ForwardCounter />
+      </div>
     </div>
   );
 };

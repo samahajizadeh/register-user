@@ -6,18 +6,20 @@ import useHttp from "./hook/use-http";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
-  const transformData = data =>{
-    const taskArray = [];
-      for (const key in data) {
-        taskArray.push({id:key , title:data[key]});
-      }
-      setTasks(taskArray);
-  }
+ 
 
-  const {isLoading,error,sendRequest:fetchTask} = useHttp({url:"https://react-movies-d52dd-default-rtdb.firebaseio.com/tasks.json"},transformData)
+  const {isLoading,error,sendRequest:fetchTask} = useHttp()
 
   useEffect(() => {
-    fetchTask();
+    const transformData = data =>{
+      const taskArray = [];
+        for (const key in data) {
+          taskArray.push({id:key , title:data[key].title});
+        }
+        setTasks(taskArray);
+    }
+
+    fetchTask({ url:"https://react-movies-d52dd-default-rtdb.firebaseio.com/tasks.json"},transformData);
   }, []);
 
   const taskAddHandler = (task) =>{

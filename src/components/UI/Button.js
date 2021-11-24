@@ -4,7 +4,7 @@ class Button extends Component{
     render(){
         const UIbtn = `${"btn"} ${this.props.className}`
         return(
-            <button type={this.props.type || 'button'} className={UIbtn} onClick={this.props.onClick}>{this.props.children}</button>
+            <button type={this.props.type || 'button'} className={UIbtn} onClick={this.props.onClick} disabled={this.props.disabled}>{this.props.children}</button>
         )
     }
 }

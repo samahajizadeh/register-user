@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../UI/Button";
 const Task = (props) => {
   const [enteredTask, setEnteredTask] = useState("");
   // const [enteredTaskIsValid, setEnteredTaskIsValid] = useState(false);
   const [enteredTaskIsTouched, setEnteredTaskIsTouched] = useState(false);
+  // const [formIsValid,setFormIsValid] = useState(false)
 
   const enteredTaskIsValid = enteredTask.trim() !== '';
   const TaskIsValid = !enteredTaskIsValid && enteredTaskIsTouched;
+  let formIsValid = false;
 
+  if(enteredTaskIsValid){
+    formIsValid=true
+  }
+
+  // useEffect(()=>{
+  //   if(enteredTaskIsValid){
+  //     setFormIsValid(true)
+  //   }else{
+  //     setFormIsValid(false)
+  //   }
+  // },[enteredTaskIsValid])
 
   const addTaskHandler = () => {
     setEnteredTaskIsTouched(true);
@@ -60,7 +73,7 @@ const Task = (props) => {
         {TaskIsValid && <div className="text-danger text-start">Please enterd task</div>}
       </div>
       <div className="col-auto ">
-        <Button className="btn-primary rounded-pill" onClick={addTaskHandler}>
+        <Button className="btn-primary rounded-pill" onClick={addTaskHandler} disabled={!formIsValid} >
           {!props.isLoading ? "  Add Task  " : "...isloading"}
         </Button>
       </div>

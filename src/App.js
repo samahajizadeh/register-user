@@ -1,38 +1,24 @@
 import React, { useEffect, useState } from "react";
 import NewTask from "./components/Tasks/NewTask";
 import TasksList from "./components/Tasks/TasksList";
+import useHttp from "./hook/use-http";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchTask();
-  }, []);
-
-
-  const fetchTask = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        "https://react-movies-d52dd-default-rtdb.firebaseio.com/tasks.json"
-      );
-      if (!response.ok) {
-        throw new Error("no Task");
-      }
-      const data = await response.json();
-      const taskArray = [];
+  const transformData = data =>{
+    const taskArray = [];
       for (const key in data) {
         taskArray.push({id:key , title:data[key]});
       }
       setTasks(taskArray);
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  };
+  }
+
+  const {isLoading,error,sendRequest:fetchTask} = useHttp({url:"https://react-movies-d52dd-default-rtdb.firebaseio.com/tasks.json"},transformData)
+
+  useEffect(() => {
+    fetchTask();
+  }, []);
 
   const taskAddHandler = (task) =>{
     setTasks((prevTasks) => prevTasks.concat(task));

@@ -1,32 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
+const useHttp = () =>{
+    const [isLoading,setIsLoading] = useState(false)
+    const [isError,setIsError] = useState(null)
+    const sendRequest = async(dataConfig,resultData) =>{
+        setIsLoading(true);
+        setIsError(null)
+        try{
+            const respponse = await fetch(dataConfig.url,{
+                method:dataConfig.method ? dataConfig.method: 'GET',
+                headers: dataConfig.headers ? dataConfig.headers : {},
+                body: dataConfig.body ?  JSON.stringify(dataConfig.body) : null
+            });
+            if(!respponse.ok){
+                throw new Error('Error')
+            }
+            const data = await respponse.json();
+            console.log(data)
+            resultData(data);
 
-const useHttp = () => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const sendRequest = async (requestConfig, applyData) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : "GET",
-        headers: requestConfig.headers ? requestConfig.headers : {},
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
-      });
-      if (!response.ok) {
-        throw new Error("no Task");
-      }
-      const data = await response.json();
-      applyData(data);
-    } catch (error) {
-      setError(error.message);
+        }catch(error){
+            setIsError(error.message)
+        }
+        setIsLoading(false);
     }
-    setIsLoading(false);
-  };
-  return {
-    isLoading: isLoading,
-    error: error,
-    sendRequest: sendRequest,
-  };
-};
+    return{
+        isLoading,
+        isError,
+        sendRequest
+    }
+}
 export default useHttp;

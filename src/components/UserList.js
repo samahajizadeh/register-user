@@ -3,7 +3,7 @@ import Card from "./UI/Cards";
 const UserList = (props) => {
   let userContent = (
     <tr>
-      <th colspan="5" className="text-danger text-center">
+      <th colSpan="5" className="text-danger text-center">
         not found users
       </th>
     </tr>
@@ -12,10 +12,19 @@ const UserList = (props) => {
   if (props.isLoading) {
     userContent = (
       <tr>
-        <th colspan="5" className="text-center">
+        <th colSpan="5" className="text-center">
           <div className="spinner-border text-info" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
+        </th>
+      </tr>
+    );
+  }
+  if (props.isError) {
+    userContent = (
+      <tr>
+        <th colSpan="5" className="text-danger text-center">
+          Error
         </th>
       </tr>
     );

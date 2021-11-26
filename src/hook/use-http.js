@@ -15,7 +15,6 @@ const useHttp = () =>{
                 throw new Error('Error')
             }
             const data = await respponse.json();
-            console.log(data)
             resultData(data);
 
         }catch(error){

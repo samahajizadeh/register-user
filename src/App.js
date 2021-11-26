@@ -26,7 +26,7 @@ const App = () => {
       <div className="row justify-content-center">
         <Register onAddUser={userRegister}/>
         <div className="w-100"></div>
-        <UserList users={userItem} isLoading={isLoading}/>
+        <UserList users={userItem} isLoading={isLoading} isError={isError}/>
       </div>
     </div>
   );
